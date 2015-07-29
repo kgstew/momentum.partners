@@ -1,0 +1,76 @@
+body {
+    color: #c9c9c9;
+    background: #484848 url(images/dark_fish_skin.png); 
+    font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple";
+    border-bottom: 2px solid #c9c9c9;
+    overflow: scroll;
+}
+
+.splash {
+    /*background-image: linear-gradient(to bottom,#171796 0,#15158a 96%,#0c0c4c 100%);*/
+    background: #171796; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #171796 0%, #0c0c4c 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#171796), color-stop(100%,#0c0c4c)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #171796 0%,#0c0c4c 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #171796 0%,#0c0c4c 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #171796 0%,#0c0c4c 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #171796 0%,#0c0c4c 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#171796', endColorstr='#0c0c4c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.splash .img-responsive {
+     margin: 50px auto 50px; 
+     display: block; 
+}
+
+.splash-text {
+    padding-bottom: 50px;
+    border-bottom: 2px solid #c9c9c9;
+    font-size: 3em;
+    text-transform:uppercase;
+}
+
+
+.contact {   
+    padding-top: 30px;
+    font-family: 'Goudy Bookletter 1911', serif;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    color: #c9c9c9;
+}
+
+.social-links a {
+    position: relative;
+    top: -6px;
+    margin-left: 15px;
+}
+
+.social-icon {
+    margin-bottom: 15px;
+}
+
+.copyright-text {
+    text-align: center;
+    padding: 20px 0 20px
+}
+
+@media all and (max-width: 600px) {
+.contact {
+    text-align: center;
+}
+
+.social-links {
+    margin-top: 30px;
+}
+
+@media all and (max-width: 320px) {
+    
+.contact {
+    font-size: 1.0em;
+}
+    
+.social-links {
+    font-size: 1.1em;
+}
+}

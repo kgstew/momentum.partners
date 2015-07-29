@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <title>Momentum Partners</title>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
+    <style>
+        .blizzard {
+            position:fixed; 
+            top:0;
+            left:0;
+        }
+    </style>
+  </head>
+<body onload="init()">
+
+    <script type="text/javascript" src="scripts/threeCanvas.js"></script>
+    <script type="text/javascript" src="scripts/blizzard.js"></script>
+    
+        <script>
+            var SCREEN_WIDTH = window.innerWidth;
+            var SCREEN_HEIGHT = window.innerHeight;
+            var container;
+            var particle;
+            var camera;
+            var scene;
+            var renderer;
+            var mouseX = 0;
+            var mouseY = 0;
+            var windowHalfX = window.innerWidth / 2;
+            var windowHalfY = window.innerHeight / 2;
+            
+            var particles = []; 
+            var particleImage = new Image();//THREE.ImageUtils.loadTexture( "img/ParticleSmoke.png" );
+            particleImage.src = 'images/ParticleSmoke.png'; 
+        
+        
+            function init() {
+                container = document.createElement('div');
+                container.className = "blizzard";
+                document.body.appendChild(container);
+                camera = new THREE.PerspectiveCamera( 75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
+                camera.position.z = 1000;
+                scene = new THREE.Scene();
+                scene.add(camera);
+                    
+                renderer = new THREE.CanvasRenderer();
+                renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+                var material = new THREE.ParticleBasicMaterial( { map: new THREE.Texture(particleImage) } );
+                    
+                for (var i = 0; i < 50; i++) {
+                    particle = new Particle3D( material);
+                    particle.position.x = Math.random() * 4000 - 3000;
+                    particle.position.y = Math.random() * 4000 - 3000;
+                    particle.position.z = Math.random() * 4000 - 3000;
+                    particle.scale.x = particle.scale.y =  1;
+                    scene.add( particle );
+                    
+                    particles.push(particle); 
+                }
+                container.appendChild( renderer.domElement );
+    
+                // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+                // document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+                // document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+                
+                setInterval( loop, 1000 / 30 );
+                
+            }
+            
+            function onDocumentMouseMove( event ) {
+                mouseX = event.clientX - windowHalfX;
+                mouseY = event.clientY - windowHalfY;
+            }
+            function onDocumentTouchStart( event ) {
+                if ( event.touches.length == 1 ) {
+                    event.preventDefault();
+                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                    mouseY = event.touches[ 0 ].pageY - windowHalfY;
+                }
+            }
+            function onDocumentTouchMove( event ) {
+                if ( event.touches.length == 1 ) {
+                    event.preventDefault();
+                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                    mouseY = event.touches[ 0 ].pageY - windowHalfY;
+                }
+            }
+            //
+            function loop() {
+            for(var i = 0; i<particles.length; i++)
+                {
+                    var particle = particles[i]; 
+                    particle.updatePhysics(); 
+    
+                    with(particle.position)
+                    {
+                        if(y<-1000) y+=2000; 
+                        if(x>1000) x-=2000; 
+                        else if(x<-1000) x+=2000; 
+                        if(z>1000) z-=2000; 
+                        else if(z<-1000) z+=2000; 
+                    }               
+                }
+            
+                camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+                camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+                camera.lookAt(scene.position); 
+                renderer.render( scene, camera );
+                
+            }
+        </script>
+    <div class="container-fluid splash">
+        <div class="row logo">
+            <img class="img-responsive"src="images/christmas-splash.png">
+        </div>
+        <div class="row splash-text">
+            <div class="col-sm-4" style="text-align: center;">
+                Advise.
+            </div>
+            <div class="col-sm-4" style="text-align: center;">
+                Network.
+            </div>
+            <div class="col-sm-4" style="text-align: center;">
+                Invest.
+            </div>
+        </div>
+    </div>    
+    <div class="container-fluid wrapper">
+        <div class="row contact">
+            <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-6">
+                <strong>
+                Momentum Partners, LLC<br/>
+                Tel: (415) 738-7739 | Fax: (415) 738-7741<br/>
+                1700 Montgomery | Suite 125<br/>
+                San Francisco, California 94111<br/>
+                </strong>
+            </div>
+            <div class="col-lg-3 col-lg-offset-3 col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1 social-links">
+                <div class="social-icon"><i class="fa fa-home fa-2x"></i><a href="http://momentum.partners"><strong>www.momentum.partners</strong></a></div>
+                <div class="social-icon"><i class="fa fa-twitter fa-2x"></i><a href="http://twitter.com/mxvpartners"><strong>@mxvpartners</strong></a></div>
+           </div>
+        </div>
+        <div class="row copyright">
+          <div class="copyright-text col-xs-12 col-md-4 col-md-offset-4">
+            Copyright 2014 - Momentum Partners, LLC
+          </div>
+        </div> 
+    </div>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
